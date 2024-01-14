@@ -1,8 +1,30 @@
 baseURL = 'http://example.org/'
-languageCode = 'en-us'
+languageCode = 'ja'
+defaultContentLanguage = 'ja'
+hasCJKLanguage = true
 title = 'My New Hugo Site'
 [module]
   [[module.imports]]
     path = "github.com/adityatelange/hugo-PaperMod"
 [markup.goldmark.renderer]
   unsafe = true
+[params]
+  [params.homeInfoParams]
+    Title = "Hi there"
+    Content = "Can be Info, links, about..."
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+[menus]
+[[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+[[menus.main]]
+    name = 'tags'
+    pageRef = '/tags'
+    weight = 20
+[[menus.main]]
+    name = 'categories'
+    pageRef = '/categories'
+    weight = 20

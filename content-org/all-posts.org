@@ -1,9 +1,33 @@
 #+hugo_base_dir: ../
-#+TITLE: My blog title
+#+title: u-yuta
+#+author: u-yuta
 
-* DONE My first post                                        :tag1:@category1:
-  CLOSED: [2024-01-02 Tue 18:50]
-:PROPERTIES:
-:EXPORT_FILE_NAME: my-first-post
-:END:
-This is my post body
+
+* blog
+** DONE 日本語のポスト
+   CLOSED: [2024-01-03 Wed 11:55]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: post-in-japanese
+   :END:
+ 日本語のポストのテスト。
+
+ 段落変更。
+ 改行。
+
+** DONE ポストの日付指定
+   CLOSED: [2024-01-02 Tue 11:54]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: datetime-of-a-post
+   :END:
+  
+   CLOSED の日付になる？
+** DONE My first post                                       :tag1:@category1:
+   CLOSED: [2024-01-01 Mon 18:50]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: my-first-post
+   :END:
+
+ This is my post body
+* Area
+** Python
+** 
