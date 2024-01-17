@@ -28,6 +28,45 @@
    :END:
 
  This is my post body
+** DONE Python環境構築 WSL
+   CLOSED: [2024-01-17 Wed 23:10]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: python-environment-setup-on-wsl
+   :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :ShowToc true
+   :END:
+
+*** 方針： ベース環境と仮想環境
+    - システムのPythonとは別にPythonをインストールして、ベースの環境（シェルで
+      =python= を実行したときに呼び出される環境）として使う。
+      - 使用ツール： =asdf=
+    - ベース環境は以下の用途で使う。
+      - 一時的な単発作業など、専用の仮想環境を作るまでもない作業
+      - Jupyterの実行
+    - プロジェクトごとに仮想環境を作る。
+      - 使用ツール： =venv=, 必要に応じて =Poetry=, =conda=
+       
+*** 方針： Jupyter関連
+    - Jupyterは基本的にベース環境にのみインストールする。
+      - 仮想環境ごとにJupyter, JupyterLab, ... をインストールするのが煩わしいため。
+      - プロジェクトを切り替えるたびにJupyterLabを起動し直して、ルートフォルダ
+        の場所が変わるのでファイルを開き直して、...ということがないので便利
+    - プロジェクトごとの仮想環境をJupyterのカーネルとして登録しておく。
+      - ベース環境のJupyterを起動してから登録したカーネルを選択することで、
+        Jupyter上で仮想環境を利用する。
+  
+**** ipynbファイルのバージョン（Git）管理
+     Jupytextでpy-script化したものをGit管理する。ipynbファイル自体をGit管理すると
+     実行状態によって差分が出て管理がしづらいため。
+
+**** 例外
+     condaで仮想環境を作った場合で仮想環境にPython以外のプログラムが含まれる場合は、
+     上記の方法だとJupyter上でのプログラムの動作に支障が出る。JupyterにPython
+     カーネルを登録しても、Python以外のプログラムへのパスが通らないため。
+
+     その場合はcondaの仮想環境にJupyterをインストールして使う。
+
+     個人的にはcondaが必要になるケースがほとんどなく、基本的には =venv= と =pip=
+     で済ませている。
 * Area
 ** Python
 ** 
