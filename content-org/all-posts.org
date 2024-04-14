@@ -4,69 +4,42 @@
 
 
 * blog
-** DONE 日本語のポスト
-   CLOSED: [2024-01-03 Wed 11:55]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: post-in-japanese
-   :END:
- 日本語のポストのテスト。
+** DONE Windows WSLでのPython環境構築メモ 1                       :python:
+CLOSED: [2024-04-14 Sun 16:29]
+:PROPERTIES:
+:EXPORT_FILE_NAME: python-on-wsl-environment-setup-memo-1
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :ShowToc true
+:END:
 
- 段落変更。
- 改行。
+WSL上でのPython環境構築に関するメモ。ここでは方針のみ。具体的な手順は後ほど追加する。
+*** 前提
+Pythonの用途は、データ解析と統計処理・可視化、物理・工学の計算機シミュレーション、数式処理など。
 
-** DONE ポストの日付指定
-   CLOSED: [2024-01-02 Tue 11:54]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: datetime-of-a-post
-   :END:
+Numpy, Scipy等による数値計算、Matplotlib、Sympyによる
+   
+*** 方針： ベース環境
+システムのPython（OSが使用するPython）とは別に、「ベース環境」として普段使い用のPython環境をインストールする。
+
+ベース環境は以下の用途で使う。
+- 一時的な単発作業など、専用の仮想環境を作るまでもない作業
+- Jupyter Notebook/Lab の実行
+
+ベース環境は [[https://asdf-vm.com][asdf]] を用いてインストールする。必要に応じてバージョンが切り替えられるようにするため。
+後述する仮想環境を有効にしていないときは、シェルの ~python~ コマンドでベース環境のPythonが実行される。
+ 
+*** 方針: 仮想環境
+Python本体や使用ライブラリのバージョン違いによる不具合を避けて再現性を保つため、プロジェクトごとに実行環境を作って管理する。
+そのために仮想環境を使う。
+
+仮想環境はプロジェクトのrootディレクトリの ~.venv/~ にインストールする。VSCodeで自動的に認識されるため。      
+
+*** 方針： Jupyter での仮想環境の利用
+Jupyterは基本的にベース環境にのみインストールする。
+仮想環境ごとにJupyterをインストールすると次のような問題が出るため。
+- 仮想環境ごとにJupyter, JupyterLab, ... をインストールする必要があり、手間とディスク容量がかかる。
+- プロジェクトを切り替えるたびにJupyterLabを起動し直したり、ルートフォルダ
+  の場所が変わるのでファイルを開き直したりする必要がある。
+
+プロジェクトの仮想環境ごとにipykernelをインストールをして、その仮想環境をJupyter
+のカーネルとして登録しておくと、上記の問題が避けられる。
   
-   CLOSED の日付になる？
-** DONE My first post                                       :tag1:@category1:
-   CLOSED: [2024-01-01 Mon 18:50]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: my-first-post
-   :END:
-
- This is my post body
-** DONE Python環境構築 WSL
-   CLOSED: [2024-01-17 Wed 23:10]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: python-environment-setup-on-wsl
-   :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :ShowToc true
-   :END:
-
-*** 方針： ベース環境と仮想環境
-    - システムのPythonとは別にPythonをインストールして、ベースの環境（シェルで
-      =python= を実行したときに呼び出される環境）として使う。
-      - 使用ツール： =asdf=
-    - ベース環境は以下の用途で使う。
-      - 一時的な単発作業など、専用の仮想環境を作るまでもない作業
-      - Jupyterの実行
-    - プロジェクトごとに仮想環境を作る。
-      - 使用ツール： =venv=, 必要に応じて =Poetry=, =conda=
-       
-*** 方針： Jupyter関連
-    - Jupyterは基本的にベース環境にのみインストールする。
-      - 仮想環境ごとにJupyter, JupyterLab, ... をインストールするのが煩わしいため。
-      - プロジェクトを切り替えるたびにJupyterLabを起動し直して、ルートフォルダ
-        の場所が変わるのでファイルを開き直して、...ということがないので便利
-    - プロジェクトごとの仮想環境をJupyterのカーネルとして登録しておく。
-      - ベース環境のJupyterを起動してから登録したカーネルを選択することで、
-        Jupyter上で仮想環境を利用する。
-  
-**** ipynbファイルのバージョン（Git）管理
-     Jupytextでpy-script化したものをGit管理する。ipynbファイル自体をGit管理すると
-     実行状態によって差分が出て管理がしづらいため。
-
-**** 例外
-     condaで仮想環境を作った場合で仮想環境にPython以外のプログラムが含まれる場合は、
-     上記の方法だとJupyter上でのプログラムの動作に支障が出る。JupyterにPython
-     カーネルを登録しても、Python以外のプログラムへのパスが通らないため。
-
-     その場合はcondaの仮想環境にJupyterをインストールして使う。
-
-     個人的にはcondaが必要になるケースがほとんどなく、基本的には =venv= と =pip=
-     で済ませている。
-* Area
-** Python
-** 
